@@ -1,0 +1,30 @@
+body
+{
+background-color: rgba(105, 102, 102, 0.158);
+}
+
+h3
+{
+  
+}
+p
+{
+
+}
+a
+{
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.d1:hover
+{
+background-color: rgb(14, 72, 208);
+color: white;
+}
+
+h1
+{
+  font-style: italic;
+}
+

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Clients</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid d-flex my-2 w-100">
+        <div class="sidebar  ms-2 my-2" style="background-color: rgb(5, 83, 156); width: 230px; 
+        border-top-left-radius: 10px; border-bottom-left-radius: 10px; height: 600px;">
+        <ul class="list-unstyled ms-3 mt-3">
+            <li class="d-flex mt-5 my-4">
+                <span class="mx-2 mt-2"><img src="images/home_16px.png" alt=""></span>
+                <a href="projet-index.html" class="text-white mt-1">Accueil</a>
+            </li>
+            <li class="d-flex mt-2">
+                <span class="mx-2 mt-2"><img src="images/scan_stock_16px.png" alt=""></span>
+                <a href="projet-stocks.html" class="text-white mt-1">Stocks</a>
+            </li>
+            <li class="my-4 d-flex">
+                <span class="mx-2 mt-2"><img src="images/sell_16px.png" alt="" class=""></span>
+                <a href="projet-vente.html" class="text-white mt-1">Ventes</a>
+            </li>
+            <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/reception_16px.png" alt="" class=""></span>
+              <a href="projet-clients.html" class="text-white mt-1">Clients</a>
+          </li>
+            <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/online_money_transfer_16px.png" alt="" class=""></span>
+              <a href="projet-finance.html" class="text-white mt-1">Finances</a>
+          </li>
+            <li class="my-4 d-flex">
+                <span class="mx-2 mt-2"><img src="images/user_groups_16px.png" alt="" class=""></span>
+                <a href="projet-employeur.html" class="text-white mt-1">Employers</a>
+            </li>
+            <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/buy_16px.png" alt="" class=""></span>
+              <a href="projet-fournisseur.html" class="text-white mt-1">Fournisseur</a>
+          </li>
+            <li class="my-4 d-flex">
+                <span class="mx-2 mt-2"><img src="images/settings_16px.png" alt="" class=""></span>
+                <a href="#" class="text-white mt-1">paramètre</a>
+            </li>
+        </ul>
+    </div>
+    <div class="flex-grow-1 my-2 me-2" style="background-color: rgba(214, 210, 220, 0.539); border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+
+        <header class="shadow-lg py-2 mx-3 mt-3">
+            <h2 class="text-center my-1">Gestion de Clients</h2>
+        </header>
+
+        <!-- Navigation des onglets -->
+        <ul class="nav nav-tabs ms-3 my-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="list-tab" data-bs-toggle="tab" data-bs-target="#list" type="button" role="tab" aria-controls="list" aria-selected="true">Liste des Clients</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="add-tab" data-bs-toggle="tab" data-bs-target="#add" type="button" role="tab" aria-controls="add" aria-selected="false">Ajouter un Client</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="transaction-tab" data-bs-toggle="tab" data-bs-target="#transaction" type="button" role="tab" aria-controls="transaction" aria-selected="false">Ajouter une Transaction</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history" aria-selected="false">Historique des Transactions</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification" type="button" role="tab" aria-controls="notification" aria-selected="false">Notifications</button>
+            </li>
+        </ul>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content" id="myTabContent">
+            <!-- Liste des Clients -->
+            <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                <div class="mt-4 mx-3">
+                    <input class="form-control mb-3" id="searchClient" type="text" placeholder="Rechercher un client...">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientList">
+                            <!-- Les lignes de clients seront insérées ici dynamiquement -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Ajouter un Nouveau Client -->
+            <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+                <div class="mt-4 ms-3">
+                    <form id="addClientForm">
+                        <div class="mb-3">
+                            <label for="clientName" class="form-label">Nom</label>
+                            <input type="text" class="form-control w-75" id="clientName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control w-75" id="clientEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientPhone" class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control w-75" id="clientPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientAddress" class="form-label">Adresse</label>
+                            <input type="text" class="form-control w-75" id="clientAddress" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Ajouter une Transaction -->
+            <div class="tab-pane fade" id="transaction" role="tabpanel" aria-labelledby="transaction-tab">
+                <div class="mt-4 ms-3">
+                    <form id="addTransactionForm">
+                        <div class="mb-3">
+                            <label for="transactionClient" class="form-label">Client</label>
+                            <select class="form-control w-75" id="transactionClient" required>
+                                <!-- Les options de clients seront insérées ici dynamiquement -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionDetails" class="form-label">Détails</label>
+                            <textarea class="form-control w-75" id="transactionDetails" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionAmount" class="form-label">Montant</label>
+                            <input type="number" class="form-control w-75" id="transactionAmount" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Historique des Transactions -->
+            <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                <div class="mt-4">
+                    <ul class="list-group" id="transactionHistory">
+                        <!-- Les transactions seront insérées ici dynamiquement -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+                <div class="mt-4 ms-3">
+                    <form id="sendNotificationForm">
+                        <div class="mb-3">
+                            <label for="notificationMessage" class="form-label">Message</label>
+                            <textarea class="form-control w-75" id="notificationMessage" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal de Confirmation de Suppression -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmer la Suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir supprimer ce client ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Modification de Client -->
+    <div class="modal fade" id="editClientModal" tabindex="-1" aria-labelledby="editClientModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editClientModalLabel">Modifier le Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editClientForm">
+                        <div class="mb-3">
+                            <label for="editClientName" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="editClientName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editClientEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editClientEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editClientPhone" class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control" id="editClientPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editClientAddress" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" id="editClientAddress" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="css/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let clients = [];
+            let transactions = [];
+            let currentClientId;
+
+            // Ajouter un client
+            document.getElementById('addClientForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = document.getElementById('clientName').value;
+                const email = document.getElementById('clientEmail').value;
+                const phone = document.getElementById('clientPhone').value;
+                const address = document.getElementById('clientAddress').value;
+
+                const clientId = Date.now();
+                clients.push({ id: clientId, name, email, phone, address });
+                renderClients();
+                this.reset();
+            });
+
+            // Ajouter une transaction
+            document.getElementById('addTransactionForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const clientId = document.getElementById('transactionClient').value;
+                const details = document.getElementById('transactionDetails').value;
+                const amount = document.getElementById('transactionAmount').value;
+
+                transactions.push({ clientId, details, amount, date: new Date().toLocaleString() });
+                renderTransactions();
+                this.reset();
+            });
+
+            // Rendre les clients dans la table
+            function renderClients() {
+                const clientList = document.getElementById('clientList');
+                clientList.innerHTML = '';
+                clients.forEach(client => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${client.name}</td>
+                        <td>${client.email}</td>
+                        <td>${client.phone}</td>
+                        <td>${client.address}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning editClient" data-id="${client.id}">Modifier</button>
+                            <button class="btn btn-sm btn-danger deleteClient" data-id="${client.id}">Supprimer</button>
+                        </td>
+                    `;
+                    clientList.appendChild(row);
+                });
+                renderTransactionClients();
+            }
+
+            // Rendre les transactions dans la liste
+            function renderTransactions() {
+                const transactionHistory = document.getElementById('transactionHistory');
+                transactionHistory.innerHTML = '';
+                transactions.forEach(transaction => {
+                    const client = clients.find(c => c.id == transaction.clientId);
+                    const item = document.createElement('li');
+                    item.className = 'list-group-item';
+                    item.innerHTML = `
+                        <strong>${client.name}</strong> - ${transaction.details} - ${transaction.amount}CFA - ${transaction.date}
+                    `;
+                    transactionHistory.appendChild(item);
+                });
+            }
+
+            // Ajouter les clients dans le select de transactions
+            function renderTransactionClients() {
+                const transactionClient = document.getElementById('transactionClient');
+                transactionClient.innerHTML = '';
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.id;
+                    option.textContent = client.name;
+                    transactionClient.appendChild(option);
+                });
+            }
+
+            // Gérer la suppression de client
+            document.getElementById('clientList').addEventListener('click', function (e) {
+                if (e.target.classList.contains('deleteClient')) {
+                    const clientId = e.target.getAttribute('data-id');
+                    currentClientId = clientId;
+                    const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+                    confirmDeleteModal.show();
+                }
+            });
+
+            document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+                clients = clients.filter(client => client.id != currentClientId);
+                renderClients();
+                const confirmDeleteModal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
+                confirmDeleteModal.hide();
+            });
+
+            // Gérer la modification de client
+            document.getElementById('clientList').addEventListener('click', function (e) {
+                if (e.target.classList.contains('editClient')) {
+                    const clientId = e.target.getAttribute('data-id');
+                    const client = clients.find(client => client.id == clientId);
+
+                    document.getElementById('editClientName').value = client.name;
+                    document.getElementById('editClientEmail').value = client.email;
+                    document.getElementById('editClientPhone').value = client.phone;
+                    document.getElementById('editClientAddress').value = client.address;
+
+                    currentClientId = clientId;
+                    const editClientModal = new bootstrap.Modal(document.getElementById('editClientModal'));
+                    editClientModal.show();
+                }
+            });
+
+            document.getElementById('editClientForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = document.getElementById('editClientName').value;
+                const email = document.getElementById('editClientEmail').value;
+                const phone = document.getElementById('editClientPhone').value;
+                const address = document.getElementById('editClientAddress').value;
+
+                clients = clients.map(client => 
+                    client.id == currentClientId ? { ...client, name, email, phone, address } : client
+                );
+                renderClients();
+                const editClientModal = bootstrap.Modal.getInstance(document.getElementById('editClientModal'));
+                editClientModal.hide();
+            });
+        });
+    </script>
+</body>
+
+</html>

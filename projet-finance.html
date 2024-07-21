@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Finances</title>
+  <!-- Link Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Onglets -->
+  <div class="container-fluid d-flex m-0 p-0 w-100">
+    <div class="sidebar  ms-2 my-2" style="background-color: rgb(5, 83, 156); width: 230px; 
+    border-top-left-radius: 10px; border-bottom-left-radius: 10px; height: 600px;">
+      <ul class="list-unstyled ms-3 mt-3">
+          <li class="d-flex mt-5 my-4">
+            <span class="mx-2 mt-2"><img src="images/home_16px.png" alt=""></span>
+            <a href="projet-index.html" class="text-white mt-1">Accueil</a>
+          </li>
+          <li class="d-flex mt-2">
+              <span class="mx-2 mt-2"><img src="images/scan_stock_16px.png" alt=""></span>
+              <a href="projet-stocks.html" class="text-white mt-1">Stocks</a>
+          </li>
+          <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/sell_16px.png" alt="" class=""></span>
+              <a href="projet-vente.html" class="text-white mt-1">Ventes</a>
+          </li>
+          <li class="my-4 d-flex">
+            <span class="mx-2 mt-2"><img src="images/reception_16px.png" alt="" class=""></span>
+            <a href="projet-clients.html" class="text-white mt-1">Clients</a>
+        </li>
+          <li class="my-4 d-flex">
+            <span class="mx-2 mt-2"><img src="images/online_money_transfer_16px.png" alt="" class=""></span>
+            <a href="projet-finance.html" class="text-white mt-1">Finances</a>
+        </li>
+          <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/user_groups_16px.png" alt="" class=""></span>
+              <a href="projet-employeur.html" class="text-white mt-1">Employers</a>
+          </li>
+          <li class="my-4 d-flex">
+            <span class="mx-2 mt-2"><img src="images/buy_16px.png" alt="" class=""></span>
+            <a href="projet-fournisseur.html" class="text-white mt-1">Fournisseur</a>
+        </li>
+          <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/settings_16px.png" alt="" class=""></span>
+              <a href="#" class="text-white mt-1">paramètre</a>
+          </li>
+      </ul>
+  </div>
+  <div class="flex-grow-1 me-2 my-2" style="background-color:rgba(214, 210, 220, 0.539);
+      border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+    <header class="shadow-lg py-2 mx-3 mt-3">
+      <h2 class="text-center">Gestion de Finances</h2>
+  </header>
+  <ul class="nav nav-tabs my-4 mx-4" id="onglets" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="creance-tab" data-bs-toggle="tab" data-bs-target="#creance" type="button" role="tab" aria-controls="creance" aria-selected="true">Créance</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="dette-tab" data-bs-toggle="tab" data-bs-target="#dette" type="button" role="tab" aria-controls="dette" aria-selected="false">Dette</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="facture-tab" data-bs-toggle="tab" data-bs-target="#facture" type="button" role="tab" aria-controls="facture" aria-selected="false">Facture</button>
+    </li>
+  </ul>
+  <!-- Contenu des onglets -->
+  <div class="tab-content" id="onglets-contenu">
+    <!-- Onglet Créance -->
+    <div class="tab-pane fade show active my-2" id="creance" role="tabpanel" aria-labelledby="creance-tab">
+     
+      <div class="text-end mx-3">
+         <!-- Bouton Ajouter Créance -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterCreanceModal">Ajouter Créance</button>
+      </div>
+      <h5 class="mt-3 text-center">Liste des Créances</h5>
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom &amp; Prenom</th>
+            <th>N° CINB/Passeport</th>
+            <th>Profféssion</th>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Montant Creance (CFA)</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table-creances">
+          <!-- Les créances ajoutées seront affichées ici -->
+        </tbody>
+      </table>
+      
+    </div>
+    <!-- Onglet Dette -->
+    <div class="tab-pane fade" id="dette" role="tabpanel" aria-labelledby="dette-tab">
+      <div class="text-end mx-2">
+     <!-- Bouton Ajouter Dette -->
+     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterDetteModal">Ajouter Dette</button>
+      </div>
+      
+      <h5 class="mt-3 text-center">Liste des Dettes</h5>
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom fournisseur</th>
+            <th>N° CINB/Passeport</th>
+            <th>Email</th>
+            <th>Siège Social</th>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Montant Dette (CFA)</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table-dettes">
+          <!-- Les dettes ajoutées seront affichées ici -->
+        </tbody>
+      </table>
+     
+    </div>
+    <!-- Onglet Facture -->
+    <div class="tab-pane fade" id="facture" role="tabpanel" aria-labelledby="facture-tab">
+      <h5 class="mt-3 text-center">Factures</h5>
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+           
+          </tr>
+        </thead>
+        <tbody id="table-factures">
+          <!-- Les factures seront affichées ici -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Modale Ajouter Créance -->
+<div class="modal fade" id="ajouterCreanceModal" tabindex="-1" aria-labelledby="ajouterCreanceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ajouterCreanceModalLabel">Ajouter Créance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-creance">
+          <div class="mb-3">
+            <label for="nomClient" class="form-label">Nom & Prenom</label>
+            <input type="text" class="form-control" id="nomClient" required>
+          </div>
+          <div class="mb-3">
+            <label for="numeroClient" class="form-label">N° CINB/Passeport</label>
+            <input type="text" class="form-control" id="numeroClient" required>
+          </div>
+          <div class="mb-3">
+            <label for="profClient" class="form-label">Profféssion</label>
+            <input type="text" class="form-control" id="profClient" required>
+          </div>
+          <div class="mb-3">
+            <label for="produitCreance" class="form-label">Produit</label>
+            <select class="form-select" id="produitCreance" required>
+                <option value="">Sélectionnez...</option>
+                <option value="Television">Television</option>
+                <option value="Imprimante">Imprimante</option>
+                <option value="Ordinateur portable">Ordinateur portable</option>
+                <option value="Papier A4">Papier A4</option>
+                <option value="Stylo">Stylo</option>
+            </select>
+        </div>
+          <div class="mb-3">
+            <label for="quantiteCreance" class="form-label">Quantité</label>
+            <input type="number" class="form-control" id="quantiteCreance" required>
+          </div>
+          <div class="mb-3">
+            <label for="montantCreance" class="form-label">Montant Creance(CFA)</label>
+            <input type="number" class="form-control" id="montantCreance" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="dateCreance" class="form-label">Date</label>
+            <input type="date" class="form-control" id="dateCreance" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Ajouter Créance</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modale Ajouter Dette -->
+<div class="modal fade" id="ajouterDetteModal" tabindex="-1" aria-labelledby="ajouterDetteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ajouterDetteModalLabel">Ajouter Dette</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-dette">
+          <div class="mb-3">
+            <label for="fournisseurDette" class="form-label">Nom fournisseur</label>
+            <input type="text" class="form-control" id="fournisseurDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="numeroFournisseur" class="form-label">N° CINB/Passeport</label>
+            <input type="text" class="form-control" id="numeroFournisseur" required>
+          </div>
+          <div class="mb-3">
+            <label for="adresseDette" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="adresseDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="siegeDette" class="form-label">Siège Social</label>
+            <input type="text" class="form-control" id="siegeDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="produitDette" class="form-label">Produit</label>
+            <select class="form-select" id="produitDette" required>
+              <option value="">Sélectionnez...</option>
+              <option value="Television">Television</option>
+              <option value="Imprimante">Imprimante</option>
+              <option value="Ordinateur portable">Ordinateur portable</option>
+              <option value="Papier A4">Papier A4</option>
+              <option value="Stylo">Stylo</option>
+          </select>
+        </div>
+          <div class="mb-3">
+            <label for="quantiteDette" class="form-label">Quantité</label>
+            <input type="number" class="form-control" id="quantiteDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="montantDette" class="form-label">Montant Dette(CFA)</label>
+            <input type="number" class="form-control" id="montantDette" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="dateDette" class="form-label">Date</label>
+            <input type="date" class="form-control" id="dateDette" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Ajouter Dette</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modale Voir Facture -->
+<div class="modal fade" id="voirFactureModal" tabindex="-1" aria-labelledby="voirFactureModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="voirFactureModalLabel">Facture</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="factureContent">
+        <!-- Contenu de la facture générée sera affiché ici -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de modification pour les créances -->
+<div class="modal fade" id="modifierCreanceModal" tabindex="-1" aria-labelledby="modifierCreanceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifierCreanceModalLabel">Modifier Créance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-modifier-creance">
+          <div class="mb-3">
+            <label for="nomClient" class="form-label">Nom & Prenom</label>
+            <input type="text" class="form-control" id="nomClient" required>
+          </div>
+          <div class="mb-3">
+            <label for="numeroClient" class="form-label">N° CINB/Passeport</label>
+            <input type="text" class="form-control" id="numeroClient" required>
+          </div>
+          <div class="mb-3">
+            <label for="profClient" class="form-label">Profféssion</label>
+            <input type="text" class="form-control" id="profClient" required>
+          </div>
+          <div class="mb-3">
+            <label for="produitCreance" class="form-label">Produit</label>
+            <select class="form-select" id="produitCreance" required>
+              <option value="">Sélectionnez...</option>
+              <option value="Television">Television</option>
+              <option value="Imprimante">Imprimante</option>
+              <option value="Ordinateur portable">Ordinateur portable</option>
+              <option value="Papier A4">Papier A4</option>
+              <option value="Stylo">Stylo</option>
+          </select>
+        </div>
+          <div class="mb-3">
+            <label for="quantiteCreance" class="form-label">Quantité</label>
+            <input type="number" class="form-control" id="quantiteCreance" required>
+          </div>
+          <div class="mb-3">
+            <label for="montantCreance" class="form-label">montant Creance(CFA)</label>
+            <input type="number" class="form-control" id="montantCreance" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="dateCreance" class="form-label">Date</label>
+            <input type="date" class="form-control" id="dateCreance" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Modifier Créance</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de modification pour les dettes -->
+<div class="modal fade" id="modifierDetteModal" tabindex="-1" aria-labelledby="modifierDetteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifierDetteModalLabel">Modifier Dette</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-modifier-dette">
+          <div class="mb-3">
+            <label for="fournisseurDette" class="form-label">Nom fournisseur</label>
+            <input type="text" class="form-control" id="fournisseurDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="numeroFournisseur" class="form-label">N° CINB/Passeport</label>
+            <input type="text" class="form-control" id="numeroFournisseur" required>
+          </div>
+          <div class="mb-3">
+            <label for="adresseDette" class="form-label">Email</label>
+            <input type="email" class="form-control" id="adresseDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="siegeDette" class="form-label">Siège Social</label>
+            <input type="text" class="form-control" id="siegeDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="produitDette" class="form-label">Produit</label>
+            <select class="form-select" id="produitDette" required>
+              <option value="">Sélectionnez...</option>
+              <option value="Television">Television</option>
+              <option value="Imprimante">Imprimante</option>
+              <option value="Ordinateur portable">Ordinateur portable</option>
+              <option value="Papier A4">Papier A4</option>
+              <option value="Stylo">Stylo</option>
+          </select>
+        </div>
+          <div class="mb-3">
+            <label for="quantiteDette" class="form-label">Quantité</label>
+            <input type="number" class="form-control" id="quantiteDette" required>
+          </div>
+          <div class="mb-3">
+            <label for="montantDette" class="form-label ">Montant Dette (CFA)</label>
+            <input type="number" class="form-control" id="montantDette" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="dateDette" class="form-label">Date</label>
+            <input type="date" class="form-control" id="dateDette" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Modifier Dette</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de suppression pour les créances -->
+<div class="modal fade" id="supprimerCreanceModal" tabindex="-1" aria-labelledby="supprimerCreanceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="supprimerCreanceModalLabel">Supprimer Créance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer cette créance ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" id="confirmerSuppressionCreance">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de suppression pour les dettes -->
+<div class="modal fade" id="supprimerDetteModal" tabindex="-1" aria-labelledby="supprimerDetteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="supprimerDetteModalLabel">Supprimer Dette</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer cette dette ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" id="confirmerSuppressionDette">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Script Bootstrap Bundle avec Popper.js -->
+<script src="css/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+
+
+<script>
+ // Données locales pour créances et dettes
+let creances = JSON.parse(localStorage.getItem('creances')) || [];
+let dettes = JSON.parse(localStorage.getItem('dettes')) || [];
+let factures = JSON.parse(localStorage.getItem('factures')) || [];
+
+
+  // Déclaration d'un objet pour associer chaque produit à son prix unitaire pour les Creances
+  const prixUnitaires = {
+      "Television": 100000, // Prix unitaire pour le produit 1 en CFA
+      "Imprimante": 150000, // Prix unitaire pour le produit 2 en CFA
+      "Ordinateur portable": 200000, // Prix unitaire pour le produit 2 en CFA
+      "Papier A4": 50, // Prix unitaire pour le produit 2 en CFA
+      "Stylo": 150, // Prix unitaire pour le produit 2 en CFA
+      // Ajoutez d'autres produits avec leurs prix unitaires ici
+    };
+
+    // Fonction pour calculer le montant total en fonction du produit et de la quantité
+    function calculerMontantTotal(produitCreance, quantiteCreance) {
+      const prixUnitaire = prixUnitaires[produitCreance];
+      return prixUnitaire * quantiteCreance;
+    }
+
+    $(document).ready(function() {
+      // Écouteur d'événement pour le changement de quantité
+      $('#quantiteCreance').on('input', function() {
+        const produitCreance = $('#produitCreance').val();
+        const quantiteCreance = $(this).val();
+        const montantTotal = calculerMontantTotal(produitCreance, quantiteCreance);
+        $('#montantCreance').val(montantTotal);
+      });
+    });
+
+
+
+  // Déclaration d'un objet pour associer chaque produit à son prix unitaire pour les dettes
+  const prixUntaires = {
+      "Television": 100000, // Prix unitaire pour le produit 1 en CFA
+      "Imprimante": 150000, // Prix unitaire pour le produit 2 en CFA
+      "Ordinateur portable": 200000,
+      "Papier A4": 50, // Prix unitaire pour le produit 2 en CFA
+      "Stylo": 150,  // Prix unitaire pour le produit 2 en CFA
+      // Ajoutez d'autres produits avec leurs prix unitaires ici
+    };
+
+    // Fonction pour calculer le montant total en fonction du produit et de la quantité
+    function calculerMontantTotal(produitDette, quantiteDette) {
+      const prixUntaire = prixUntaires[produitDette];
+      return prixUntaire * quantiteDette;
+    }
+
+    $(document).ready(function() {
+      // Écouteur d'événement pour le changement de quantité
+      $('#quantiteDette').on('input', function() {
+        const produitDette = $('#produitDette').val();
+        const quantiteDette = $(this).val();
+        const montantTotal = calculerMontantTotal(produitDette, quantiteDette);
+        $('#montantDette').val(montantTotal);
+      });
+    });
+
+// Fonction pour afficher les créances dans le tableau
+function afficherCreances() {
+  const tableBody = document.getElementById('table-creances');
+  tableBody.innerHTML = '';
+  creances.forEach(creance => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-id', creance.id);
+    tr.innerHTML = `
+      <td>${creance.id}</td>
+      <td>${creance.nomClient}</td>
+      <td>${creance.numeroClient}</td>
+      <td>${creance.profClient}</td>
+      <td>${creance.produitCreance}</td>
+      <td>${creance.quantiteCreance}</td>
+      <td>${creance.montantCreance}</td>
+      <td>${creance.dateCreance}</td>
+      <td>
+        <button class="btn btn-outline-danger btn-sm" onclick="ouvrirModalSuppression(${creance.id}, 'creance')">Supprimer</button>
+      </td>
+    `;
+    tableBody.appendChild(tr);
+  });
+}
+
+
+
+
+// Fonction pour afficher les dettes dans le tableau
+function afficherDettes() {
+  const tableBody = document.getElementById('table-dettes');
+  tableBody.innerHTML = '';
+  dettes.forEach(dette => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-id', dette.id);
+    tr.innerHTML = `
+      <td>${dette.id}</td>
+      <td>${dette.fournisseurDette}</td>
+      <td>${dette.numeroFournisseur}</td>
+      <td>${dette.adresseDette}</td>
+      <td>${dette.siegeDette}</td>
+      <td>${dette.produitDette}</td>
+      <td>${dette.quantiteDette}</td>
+      <td>${dette.montantDette}</td>
+      <td>${dette.dateDette}</td>
+      <td>
+        <button class="btn btn-outline-danger btn-sm" onclick="ouvrirModalSuppression(${dette.id}, 'dette')">Supprimer</button>
+      </td>
+    `;
+    tableBody.appendChild(tr);
+  });
+}
+
+// Fonction pour ouvrir la modal de suppression
+function ouvrirModalSuppression(id, type) {
+  const modalId = type === 'creance' ? 'supprimerCreanceModal' : 'supprimerDetteModal';
+  const confirmerBtnId = type === 'creance' ? 'confirmerSuppressionCreance' : 'confirmerSuppressionDette';
+
+  const modal = new bootstrap.Modal(document.getElementById(modalId));
+  modal.show();
+
+  document.getElementById(confirmerBtnId).onclick = () => {
+    supprimerEntry(id, type);
+    modal.hide();
+  };
+}
+
+// Fonction pour supprimer une entrée
+function supprimerEntry(id, type) {
+  if (type === 'creance') {
+    creances = creances.filter(creance => creance.id !== id);
+    localStorage.setItem('creances', JSON.stringify(creances));
+    afficherCreances();
+  } else {
+    dettes = dettes.filter(dette => dette.id !== id);
+    localStorage.setItem('dettes', JSON.stringify(dettes));
+    afficherDettes();
+  }
+}
+
+// Fonction pour modifier une entrée
+function modifierEntry(id, type) {
+  const data = (type === 'creance' ? creances : dettes).find(entry => entry.id === id);
+  const formId = type === 'creance' ? 'form-modifier-creance' : 'form-modifier-dette';
+  const form = document.getElementById(formId);
+
+  // Pré-remplir le formulaire avec les données existantes
+  for (let key in data) {
+    if (form[key]) {
+      form[key].value = data[key];
+    }
+  }
+
+  const modalId = type === 'creance' ? 'modifierCreanceModal' : 'modifierDetteModal';
+  const modal = new bootstrap.Modal(document.getElementById(modalId));
+  modal.show();
+
+  // Mettre à jour la soumission du formulaire pour modifier l'entrée existante
+  form.onsubmit = (event) => {
+    event.preventDefault();
+
+    // Mise à jour des données
+    for (let key in data) {
+      if (form[key]) {
+        data[key] = form[key].value;
+      }
+    }
+
+    // Mettre à jour le tableau local
+    if (type === 'creance') {
+      const index = creances.findIndex(item => item.id === data.id);
+      creances[index] = data;
+      localStorage.setItem('creances', JSON.stringify(creances));
+      afficherCreances();
+    } else {
+      const index = dettes.findIndex(item => item.id === data.id);
+      dettes[index] = data;
+      localStorage.setItem('dettes', JSON.stringify(dettes));
+      afficherDettes();
+    }
+
+    // Cacher la modale
+    modal.hide();
+  };
+}
+
+// Fonction pour ajouter une nouvelle créance
+document.getElementById('form-creance').onsubmit = function(event) {
+  event.preventDefault();
+
+  const newCreance = {
+    id: Date.now(),
+    nomClient: document.getElementById('nomClient').value,
+    numeroClient: document.getElementById('numeroClient').value,
+    profClient: document.getElementById('profClient').value,
+    produitCreance: document.getElementById('produitCreance').value,
+    quantiteCreance: document.getElementById('quantiteCreance').value,
+    montantCreance: document.getElementById('montantCreance').value,
+    dateCreance: document.getElementById('dateCreance').value,
+  };
+
+  creances.push(newCreance);
+  localStorage.setItem('creances', JSON.stringify(creances));
+  afficherCreances();
+
+  document.getElementById('form-creance').reset();
+  const modal = bootstrap.Modal.getInstance(document.getElementById('ajouterCreanceModal'));
+  modal.hide();
+};
+
+// Fonction pour ajouter une nouvelle dette
+document.getElementById('form-dette').onsubmit = function(event) {
+  event.preventDefault();
+
+  const newDette = {
+    id: Date.now(),
+    fournisseurDette: document.getElementById('fournisseurDette').value,
+    numeroFournisseur: document.getElementById('numeroFournisseur').value,
+    adresseDette: document.getElementById('adresseDette').value,
+    siegeDette: document.getElementById('siegeDette').value,
+    produitDette: document.getElementById('produitDette').value,
+    quantiteDette: document.getElementById('quantiteDette').value,
+    montantDette: document.getElementById('montantDette').value,
+    dateDette: document.getElementById('dateDette').value,
+  };
+
+  dettes.push(newDette);
+  localStorage.setItem('dettes', JSON.stringify(dettes));
+  afficherDettes();
+
+  document.getElementById('form-dette').reset();
+  const modal = bootstrap.Modal.getInstance(document.getElementById('ajouterDetteModal'));
+  modal.hide();
+};
+
+
+// Fonction pour générer une facture
+function genererFacture(entry, type) {
+  const newFacture = {
+    id: Date.now(),
+    type: type,
+    nom: type === 'creance' ? entry.nomClient : entry.fournisseurDette,
+    numero: type === 'creance' ? entry.numeroClient : entry.numeroFournisseur,
+    email: type === 'creance' ? '' : entry.adresseDette,
+    siege: type === 'creance' ? '' : entry.siegeDette,
+    produit: type === 'creance' ? entry.produitCreance : entry.produitDette,
+    quantite: type === 'creance' ? entry.quantiteCreance : entry.quantiteDette,
+    montant: type === 'creance' ? entry.montantCreance : entry.montantDette,
+    date: type === 'creance' ? entry.dateCreance : entry.dateDette,
+  };
+
+  factures.push(newFacture);
+  localStorage.setItem('factures', JSON.stringify(factures));
+  afficherFactures();
+}
+
+// Fonction pour ajouter une nouvelle créance
+document.getElementById('form-creance').onsubmit = function(event) {
+  event.preventDefault();
+
+  const newCreance = {
+    id: Date.now(),
+    nomClient: document.getElementById('nomClient').value,
+    numeroClient: document.getElementById('numeroClient').value,
+    profClient: document.getElementById('profClient').value,
+    produitCreance: document.getElementById('produitCreance').value,
+    quantiteCreance: document.getElementById('quantiteCreance').value,
+    montantCreance: document.getElementById('montantCreance').value,
+    dateCreance: document.getElementById('dateCreance').value,
+  };
+
+  creances.push(newCreance);
+  localStorage.setItem('creances', JSON.stringify(creances));
+  afficherCreances();
+  
+  // Générer une facture
+  genererFacture(newCreance, 'creance');
+
+  document.getElementById('form-creance').reset();
+  const modal = bootstrap.Modal.getInstance(document.getElementById('ajouterCreanceModal'));
+  modal.hide();
+};
+
+// Fonction pour ajouter une nouvelle dette
+document.getElementById('form-dette').onsubmit = function(event) {
+  event.preventDefault();
+
+  const newDette = {
+    id: Date.now(),
+    fournisseurDette: document.getElementById('fournisseurDette').value,
+    numeroFournisseur: document.getElementById('numeroFournisseur').value,
+    adresseDette: document.getElementById('adresseDette').value,
+    siegeDette: document.getElementById('siegeDette').value,
+    produitDette: document.getElementById('produitDette').value,
+    quantiteDette: document.getElementById('quantiteDette').value,
+    montantDette: document.getElementById('montantDette').value,
+    dateDette: document.getElementById('dateDette').value,
+  };
+
+  dettes.push(newDette);
+  localStorage.setItem('dettes', JSON.stringify(dettes));
+  afficherDettes();
+  
+  // Générer une facture
+  genererFacture(newDette, 'dette');
+
+  document.getElementById('form-dette').reset();
+  const modal = bootstrap.Modal.getInstance(document.getElementById('ajouterDetteModal'));
+  modal.hide();
+};
+
+
+// Fonction pour afficher les factures dans le tableau
+function afficherFactures() {
+  const tableBody = document.getElementById('table-factures');
+  tableBody.innerHTML = '';
+  factures.forEach(facture => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-id', facture.id);
+    tr.innerHTML = `
+      <td>${facture.id}</td>
+      <td>${facture.nom}</td>
+      <td>${facture.numero || facture.email}</td>
+      <td>${facture.siege || ''}</td>
+      <td>${facture.produit}</td>
+      <td>${facture.quantite}</td>
+      <td>${facture.montant}</td>
+      <td>${facture.date}</td>
+      <td>
+       <button class="btn btn-outline-info btn-sm" onclick="voirFacture(${facture.id})">Voir</button>
+       <button class="btn btn-outline-danger btn-sm" onclick="supprimerFacture(${facture.id})">Supprimer</button>
+      </td>
+    `;
+    tableBody.appendChild(tr);
+  });
+}
+
+// Fonction pour supprimer une facture
+function supprimerFacture(id) {
+  factures = factures.filter(facture => facture.id !== id);
+  localStorage.setItem('factures', JSON.stringify(factures));
+  afficherFactures();
+}
+
+// Initialisation de l'affichage
+document.addEventListener('DOMContentLoaded', () => {
+  afficherCreances();
+  afficherDettes();
+  afficherFactures();
+});
+
+// Fonction pour voir les détails de la facture
+function voirFacture(id) {
+  const facture = factures.find(facture => facture.id === id);
+  const modal = new bootstrap.Modal(document.getElementById('voirFactureModal'));
+  const factureContent = document.getElementById('factureContent');
+
+  if (facture.type === "creance") {
+    factureContent.innerHTML = `
+      <h5 class="text-center">N° Facture: ${facture.id}</h5>
+      <p><strong>Nom:</strong> ${facture.nom}</p>
+      <p><strong>N° CINB/Passeport:</strong> ${facture.numero}</p>
+      <p><strong>Produit:</strong> ${facture.produit}</p>
+      <p><strong>Quantité:</strong> ${facture.quantite}</p>
+      <p><strong>Date:</strong> ${facture.date}</p>
+      <p><strong>Montant Créance(CFA):</strong> ${facture.montant}</p>
+    `;
+  } else if (facture.type === "dette") {
+    factureContent.innerHTML = `
+      <h5 class="text-center">N° Facture: ${facture.id}</h5>
+      <p><strong>Nom:</strong> ${facture.nom}</p>
+      <p><strong>N° CINB/Passeport:</strong> ${facture.numero}</p>
+      <p><strong>Email:</strong> ${facture.email}</p>
+      <p><strong>Siège Social:</strong> ${facture.siege}</p>
+      <p><strong>Produit:</strong> ${facture.produit}</p>
+      <p><strong>Quantité:</strong> ${facture.quantite}</p>
+      <p><strong>Date:</strong> ${facture.date}</p>
+      <p><strong>Montant Dette(CFA):</strong> ${facture.montant}</p>
+    `;
+    afficherFactures();
+  }
+
+  modal.show();
+  facture.push(newFacture);
+            localStorage.setItem('factures', JSON.stringify(factures));
+            genererFacture(newVente);
+            afficherFactures();
+}
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de gestion de stocks</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid d-flex m-0 p-0 w-100">
+        <div class="sidebar  ms-2 my-2" style="background-color: rgb(5, 83, 156); width: 230px; 
+        border-top-left-radius: 10px; border-bottom-left-radius: 10px; height: 800px;">
+           <ul class="list-unstyled ms-3 mt-3">
+            <li class="d-flex mt-5 my-4">
+                <span class="mx-2 mt-2"><img src="images/home_16px.png" alt=""></span>
+                <a href="projet-index.html" class="text-white mt-1">Accueil</a>
+            </li>
+            <li class="d-flex mt-2">
+                <span class="mx-2 mt-2"><img src="images/scan_stock_16px.png" alt=""></span>
+                <a href="projet-stocks.html" class="text-white mt-1">Stocks</a>
+            </li>
+            <li class="my-4 d-flex">
+                <span class="mx-2 mt-2"><img src="images/sell_16px.png" alt="" class=""></span>
+                <a href="projet-vente.html" class="text-white mt-1">Ventes</a>
+            </li>
+            <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/reception_16px.png" alt="" class=""></span>
+              <a href="projet-clients.html" class="text-white mt-1">Clients</a>
+          </li>
+            <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/online_money_transfer_16px.png" alt="" class=""></span>
+              <a href="projet-finance.html" class="text-white mt-1">Finances</a>
+          </li>
+            <li class="my-4 d-flex">
+                <span class="mx-2 mt-2"><img src="images/user_groups_16px.png" alt="" class=""></span>
+                <a href="projet-employeur.html" class="text-white mt-1">Employers</a>
+            </li>
+            <li class="my-4 d-flex">
+              <span class="mx-2 mt-2"><img src="images/buy_16px.png" alt="" class=""></span>
+              <a href="projet-fournisseur.html" class="text-white mt-1">Fournisseur</a>
+          </li>
+            <li class="my-4 d-flex">
+                <span class="mx-2 mt-2"><img src="images/settings_16px.png" alt="" class=""></span>
+                <a href="#" class="text-white mt-1">paramètre</a>
+            </li>
+        </ul>
+        </div>
+    
+        <div class="flex-grow-1 me-2 my-2" style="background-color:rgba(214, 210, 220, 0.539);
+      border-top-right-radius: 10px; border-bottom-right-radius: 10px; height: 600px;">
+            <header class="shadow-lg py-2 mx-3 mt-3">
+                <h2 class="text-center">Gestion des Stocks</h2>
+            </header>
+            <!--Les trois onglets-->
+            <ul class="nav nav-tabs my-4 ms-3" id="stockTab" role="tablist">
+                <li class="nav-item ">
+                    <a class="nav-link active" id="categories-tab" data-bs-toggle="tab" href="#categories" role="tab" aria-controls="categories" aria-selected="true">Catégories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="reapprovisionnement-tab" data-bs-toggle="tab" href="#reapprovisionnement" role="tab" aria-controls="reapprovisionnement" aria-selected="false">Réapprovisionnement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="ajouterStock-tab" data-bs-toggle="tab" href="#ajouterStock" role="tab" aria-controls="ajouterStock" aria-selected="false">Ajouter un stock</a>
+                </li>
+            </ul>
+            <div class="tab-content mx-3" id="stockTabContent">
+                <div class="tab-pane fade show active my-2" id="categories" role="tabpanel" aria-labelledby="categories-tab">
+                    <div class="category-section">
+                        <h4 class="text-center my-2">Catégories de Stocks</h4 class="text-center">
+                        <div class="input-group my-3 ">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Rechercher un produit...">
+                        </div>
+                        
+                        <div class="accordion" id="categoryAccordion">
+                            <!-- Les catégories seront ajoutées ici par JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="reapprovisionnement" role="tabpanel" aria-labelledby="reapprovisionnement-tab">
+                    <div class="category-section">
+                        <h4 class="text-center">Réapprovisionnement</h4 class="text-center">
+                        <form id="reapprovisionnementForm">
+                            <div class="mb-3">
+                                <label for="categorySelect" class="form-label mx-5">Choisir une catégorie</label>
+                                <select class="form-select w-75 mx-5" id="categorySelect" required>
+                                    <option value="" selected disabled>Sélectionnez une catégorie</option>
+                                    <!-- Les options seront ajoutées ici par JavaScript -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productSelect" class="form-label mx-5">Nom du produit</label>
+                                <select class="form-select w-75 mx-5" id="productSelect" required>
+                                    <option value="" selected disabled>Sélectionnez un produit</option>
+                                    <!-- Les options seront ajoutées ici par JavaScript -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productQuantity" class="form-label mx-5">Quantité à ajouter</label>
+                                <input type="number" class="form-control w-75 mx-5" id="productQuantity" required>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary mx-5">Réapprovisionner</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ajouterStock" role="tabpanel" aria-labelledby="ajouterStock-tab">
+                    <div class="category-section">
+                        <h4 class="text-center text-info">Catégorie/Produit</h4>
+                        <form id="addStockForm">
+                            <div class="mb-3">
+                                <label for="newCategoryName" class="form-label mx-5">Nom de la nouvelle catégorie</label>
+                                <input type="text" class="form-control w-75 mx-5" id="newCategoryName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="existingCategorySelect" class="form-label mx-5">Choisir une catégorie</label>
+                                <select class="form-select w-75 mx-5" id="existingCategorySelect">
+                                    <option value="" selected disabled>Sélectionnez une catégorie</option>
+                                    <!-- Les options seront ajoutées ici par JavaScript -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newProductName" class="form-label mx-5">Nom du produit</label>
+                                <input type="text" class="form-control w-75 mx-5" id="newProductName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newProductQuantity" class="form-label mx-5">Quantité</label>
+                                <input type="number" class="form-control w-75 mx-5" id="newProductQuantity" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newProductPrice" class="form-label mx-5">Prix unitaire</label>
+                                <input type="number" class="form-control w-75 mx-5" id="newProductPrice" required>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary mx-5">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <!-- Modal Supprimer -->
+    <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteProductModalLabel">Supprimer le produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteProduct">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="css/bootstrap.bundle.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    const categoryAccordion = document.getElementById('categoryAccordion');
+    const categorySelect = document.getElementById('categorySelect');
+    const productSelect = document.getElementById('productSelect');
+    const existingCategorySelect = document.getElementById('existingCategorySelect');
+    const reapprovisionnementForm = document.getElementById('reapprovisionnementForm');
+    const addStockForm = document.getElementById('addStockForm');
+    const searchInput = document.getElementById('searchInput');
+
+    // Charger les données des produits depuis le localStorage ou utiliser des données par défaut
+    const storedProducts = localStorage.getItem('products');
+    const products = storedProducts ? JSON.parse(storedProducts) : [
+        
+    ];
+
+    function saveProducts() {
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+
+    function renderProducts() {
+        categoryAccordion.innerHTML = '';
+        existingCategorySelect.innerHTML = '<option value="" selected disabled>Sélectionnez une catégorie</option>';
+        categorySelect.innerHTML = '<option value="" selected disabled>Sélectionnez une catégorie</option>';
+        productSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un produit</option>';
+
+        products.forEach((category, categoryIndex) => {
+            // Add categories to the dropdowns
+            const option = document.createElement('option');
+            option.value = categoryIndex;
+            option.textContent = category.category;
+            existingCategorySelect.appendChild(option);
+            categorySelect.appendChild(option.cloneNode(true));
+
+            // Create category accordion item
+            const categoryItem = document.createElement('div');
+            categoryItem.classList.add('accordion-item');
+
+            const headerId = `categoryHeader${categoryIndex}`;
+            const bodyId = `categoryBody${categoryIndex}`;
+
+            categoryItem.innerHTML = `
+                <h2 class="accordion-header w-75 mx-3" id="${headerId}">
+                    <button class="accordion-button text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#${bodyId}" aria-expanded="true" aria-controls="${bodyId}">
+                        ${category.category}
+                    </button>
+                </h2>
+                <div id="${bodyId}" class="accordion-collapse collapse show w-75" aria-labelledby="${headerId}" data-bs-parent="#categoryAccordion">
+                    <div class="accordion-body">
+                        <table class="table table-striped">
+                            <thead class="w-75">
+                                <tr class="w-75">
+                                    <th>Produit</th>
+                                    <th>Quantité</th>
+                                    <th>Prix Unitaire(CFA)</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="w-75">
+                                ${category.items.map((product, productIndex) => `
+                                    <tr class="w-75">
+                                        <td>${product.name}</td>
+                                        <td>${product.quantity}</td>
+                                        <td>${product.price}</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="confirmDeleteProduct(${categoryIndex}, ${productIndex})">Supprimer</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            categoryAccordion.appendChild(categoryItem);
+        });
+    }
+
+    window.viewProduct = function (categoryIndex, productIndex) {
+        const product = products[categoryIndex].items[productIndex];
+        document.getElementById('productDetails').innerText = `Nom : ${product.name}\nQuantité : ${product.quantity}\nPrix Unitaire(CFA) : ${product.price}`;
+        new bootstrap.Modal(document.getElementById('viewProductModal')).show();
+    };
+
+    
+
+    window.confirmDeleteProduct = function (categoryIndex, productIndex) {
+        const confirmDeleteButton = document.getElementById('confirmDeleteProduct');
+        confirmDeleteButton.onclick = function () {
+            products[categoryIndex].items.splice(productIndex, 1);
+            saveProducts();
+            renderProducts();
+            bootstrap.Modal.getInstance(document.getElementById('deleteProductModal')).hide();
+        };
+
+        new bootstrap.Modal(document.getElementById('deleteProductModal')).show();
+    };
+
+    reapprovisionnementForm.onsubmit = function (event) {
+        event.preventDefault();
+        const categoryIndex = categorySelect.value;
+        const productIndex = productSelect.value;
+        const quantityToAdd = parseInt(document.getElementById('productQuantity').value);
+
+        if (categoryIndex !== '' && productIndex !== '' && !isNaN(quantityToAdd)) {
+            products[categoryIndex].items[productIndex].quantity += quantityToAdd;
+            saveProducts();
+            renderProducts();
+        }
+    };
+
+    addStockForm.onsubmit = function (event) {
+        event.preventDefault();
+        const newCategoryName = document.getElementById('newCategoryName').value.trim();
+        const existingCategoryIndex = existingCategorySelect.value;
+        const newProductName = document.getElementById('newProductName').value.trim();
+        const newProductQuantity = parseInt(document.getElementById('newProductQuantity').value);
+        const newProductPrice = parseInt(document.getElementById('newProductPrice').value);
+
+        if (newCategoryName) {
+            products.push({
+                category: newCategoryName,
+                items: [{ name: newProductName, quantity: newProductQuantity, price: newProductPrice }]
+            });
+        } else if (existingCategoryIndex !== '' && newProductName && newProductQuantity && (newProductPrice)) {
+            products[existingCategoryIndex].items.push({ name: newProductName, quantity: newProductQuantity, price: newProductPrice });
+        }
+
+        saveProducts();
+        renderProducts();
+        addStockForm.reset();
+    };
+
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value.toLowerCase();
+        const rows = categoryAccordion.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const productName = row.cells[0].innerText.toLowerCase();
+            row.style.display = productName.includes(query) ? '' : 'none';
+        });
+    });
+
+    renderProducts();
+    
+    categorySelect.addEventListener('change', function () {
+    const categoryIndex = categorySelect.value;
+    productSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un produit</option>';
+    if (categoryIndex !== '') {
+        products[categoryIndex].items.forEach((product, productIndex) => {
+            const option = document.createElement('option');
+            option.value = productIndex;
+            option.textContent = product.name;
+            productSelect.appendChild(option);
+        });
+    }
+});
+
+});
+
+    </script>
+</body>
+</html>

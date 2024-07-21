@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Employeurs</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+        <div class="container-fluid d-flex m-0 p-0 w-100">
+            <div class="sidebar  ms-2 my-2" style="background-color: rgb(5, 83, 156); width: 230px; 
+            border-top-left-radius: 10px; border-bottom-left-radius: 10px; height: 600px;">
+            <ul class="list-unstyled ms-3 mt-3">
+                <li class="d-flex mt-5 my-4">
+                    <span class="mx-2 mt-2"><img src="images/home_16px.png" alt=""></span>
+                    <a href="projet-index.html" class="text-white mt-1">Accueil</a>
+                </li>
+                <li class="d-flex mt-2">
+                    <span class="mx-2 mt-2"><img src="images/scan_stock_16px.png" alt=""></span>
+                    <a href="projet-stocks.html" class="text-white mt-1">Stocks</a>
+                </li>
+                <li class="my-4 d-flex">
+                    <span class="mx-2 mt-2"><img src="images/sell_16px.png" alt="" class=""></span>
+                    <a href="projet-vente.html" class="text-white mt-1">Ventes</a>
+                </li>
+                <li class="my-4 d-flex">
+                  <span class="mx-2 mt-2"><img src="images/reception_16px.png" alt="" class=""></span>
+                  <a href="projet-clients.html" class="text-white mt-1">Clients</a>
+              </li>
+                <li class="my-4 d-flex">
+                  <span class="mx-2 mt-2"><img src="images/online_money_transfer_16px.png" alt="" class=""></span>
+                  <a href="projet-finance.html" class="text-white mt-1">Finances</a>
+              </li>
+                <li class="my-4 d-flex">
+                    <span class="mx-2 mt-2"><img src="images/user_groups_16px.png" alt="" class=""></span>
+                    <a href="projet-employeur.html" class="text-white mt-1">Employers</a>
+                </li>
+                <li class="my-4 d-flex">
+                  <span class="mx-2 mt-2"><img src="images/buy_16px.png" alt="" class=""></span>
+                  <a href="projet-fournisseur.html" class="text-white mt-1">Fournisseur</a>
+              </li>
+                <li class="my-4 d-flex">
+                    <span class="mx-2 mt-2"><img src="images/settings_16px.png" alt="" class=""></span>
+                    <a href="#" class="text-white mt-1">paramètre</a>
+                </li>
+            </ul>
+        </div>
+        <div class="flex-grow-1 my-2 me-2" style="background-color: rgba(214, 210, 220, 0.539); border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+            <header class="shadow-lg py-2 mx-3 mt-3">
+                <h2 class="text-center my-1">Gestion des Employeurs</h2>
+            </header>
+            <div class="text-start my-3 mx-4">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEmployeurModal">Ajouter Employeur</button>
+            </div>
+            <div class="form-group mb-3 mx-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un employeur...">
+            </div>
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Photo</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Nom</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Prénom</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Sexe</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Âge</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Poste</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Téléphone</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Email</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Salaire(CFA)</th>
+                        <th class="col-12 col-sm-12 col-md-6 col-lg-1">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-employeurs"></tbody>
+            </table>
+        </div>
+
+        <!-- Modal Ajouter Employeur -->
+        <div class="modal fade" id="ajouterEmployeurModal" tabindex="-1" aria-labelledby="ajouterEmployeurModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ajouterEmployeurModalLabel">Ajouter Employeur</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-employeur">
+                            <div class="mb-3">
+                                <label for="nomEmployeur" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nomEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prenomEmployeur" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" id="prenomEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sexeEmployeur" class="form-label">Sexe</label>
+                                <select class="form-select" id="sexeEmployeur" required>
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="Masculin">Masculin</option>
+                                    <option value="Féminin">Féminin</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ageEmployeur" class="form-label">Âge</label>
+                                <input type="number" class="form-control" id="ageEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="posteEmployeur" class="form-label">Poste</label>
+                                <input type="text" class="form-control" id="posteEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telephoneEmployeur" class="form-label">Téléphone</label>
+                                <input type="tel" class="form-control" id="telephoneEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailEmployeur" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="salaireEmployeur" class="form-label">Salaire(CFA)</label>
+                                <input type="number" class="form-control" id="salaireEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photoEmployeur" class="form-label">Photo</label>
+                                <br>
+                                <input type="file" id="photoEmployeur" accept="image/*">
+                                <br>
+                                <img id="preview" src="" alt="" class="w-25 h-auto my-3">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Ajouter Employeur</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Modifier Employeur -->
+        <div class="modal fade" id="modifierEmployeurModal" tabindex="-1" aria-labelledby="modifierEmployeurModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modifierEmployeurModalLabel">Modifier Employeur</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-modifier-employeur">
+                            <div class="mb-3">
+                                <label for="modifierNomEmployeur" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="modifierNomEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierPrenomEmployeur" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" id="modifierPrenomEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierSexeEmployeur" class="form-label">Sexe</label>
+                                <select class="form-select" id="modifierSexeEmployeur" required>
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="Masculin">Masculin</option>
+                                    <option value="Féminin">Féminin</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierAgeEmployeur" class="form-label">Âge</label>
+                                <input type="number" class="form-control" id="modifierAgeEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierPosteEmployeur" class="form-label">Poste</label>
+                                <input type="text" class="form-control" id="modifierPosteEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierTelephoneEmployeur" class="form-label">Téléphone</label>
+                                <input type="tel" class="form-control" id="modifierTelephoneEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierEmailEmployeur" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="modifierEmailEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierSalaireEmployeur" class="form-label">Salaire(CFA)</label>
+                                <input type="number" class="form-control" id="modifierSalaireEmployeur" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modifierPhotoEmployeur" class="form-label">Photo</label>
+                                <br>
+                                <input type="file" id="modifierPhotoEmployeur" accept="image/*">
+                                <br>
+                                <img id="modifierPreview" src="" alt="" class="w-25 h-auto my-3">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Modifier Employeur</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Supprimer Employeur -->
+        <div class="modal fade" id="supprimerEmployeurModal" tabindex="-1" aria-labelledby="supprimerEmployeurModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="supprimerEmployeurModalLabel">Confirmer la suppression</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Êtes-vous sûr de vouloir supprimer cet employeur ?</p>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Supprimer</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="css/bootstrap.bundle.min.js"></script>
+    <script>
+        let employeurs = [];
+
+        function loadEmployeursFromStorage() {
+            const storedEmployeurs = localStorage.getItem('employeurs');
+            if (storedEmployeurs) {
+                employeurs = JSON.parse(storedEmployeurs);
+                renderTable(employeurs);
+            }
+        }
+
+        function saveEmployeursToStorage() {
+            localStorage.setItem('employeurs', JSON.stringify(employeurs));
+        }
+
+        function renderTable(employeurs) {
+            const tableBody = document.getElementById('table-employeurs');
+            tableBody.innerHTML = '';
+
+            employeurs.forEach((employeur, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="${employeur.photo}" alt="" class="img" width="50" height="50"></td>
+                    <td>${employeur.nom}</td>
+                    <td>${employeur.prenom}</td>
+                    <td>${employeur.sexe}</td>
+                    <td>${employeur.age}</td>
+                    <td>${employeur.poste}</td>
+                    <td>${employeur.telephone}</td>
+                    <td>${employeur.email}</td>
+                    <td>${employeur.salaire}</td>
+                    <td>
+                        <button class="btn btn-outline-warning btn-sm me-2" onclick="editEmployeur(${index})" data-bs-toggle="modal" data-bs-target="#modifierEmployeurModal">Modifier</button>
+                        <button class="btn btn-outline-danger btn-sm" onclick="confirmDeleteEmployeur(${index})" data-bs-toggle="modal" data-bs-target="#supprimerEmployeurModal">Supprimer</button>
+                   
+
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        document.getElementById('form-employeur').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nom = document.getElementById('nomEmployeur').value;
+            const prenom = document.getElementById('prenomEmployeur').value;
+            const sexe = document.getElementById('sexeEmployeur').value;
+            const age = document.getElementById('ageEmployeur').value;
+            const poste = document.getElementById('posteEmployeur').value;
+            const telephone = document.getElementById('telephoneEmployeur').value;
+            const email = document.getElementById('emailEmployeur').value;
+            const salaire = document.getElementById('salaireEmployeur').value;
+            const photo = document.getElementById('photoEmployeur').files[0];
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoBase64 = e.target.result;
+                employeurs.push({ nom, prenom, sexe, age, poste, telephone, email, salaire, photo: photoBase64 });
+                saveEmployeursToStorage();
+                renderTable(employeurs);
+                document.getElementById('form-employeur').reset();
+                const modal = bootstrap.Modal.getInstance(document.getElementById('ajouterEmployeurModal'));
+                modal.hide();
+            };
+            reader.readAsDataURL(photo);
+        });
+
+        function editEmployeur(index) {
+            const employeur = employeurs[index];
+            document.getElementById('modifierNomEmployeur').value = employeur.nom;
+            document.getElementById('modifierPrenomEmployeur').value = employeur.prenom;
+            document.getElementById('modifierSexeEmployeur').value = employeur.sexe;
+            document.getElementById('modifierAgeEmployeur').value = employeur.age;
+            document.getElementById('modifierPosteEmployeur').value = employeur.poste;
+            document.getElementById('modifierTelephoneEmployeur').value = employeur.telephone;
+            document.getElementById('modifierEmailEmployeur').value = employeur.email;
+            document.getElementById('modifierSalaireEmployeur').value = employeur.salaire;
+            document.getElementById('modifierPreview').src = employeur.photo;
+
+            document.getElementById('form-modifier-employeur').onsubmit = function(event) {
+                event.preventDefault();
+
+                employeur.nom = document.getElementById('modifierNomEmployeur').value;
+                employeur.prenom = document.getElementById('modifierPrenomEmployeur').value;
+                employeur.sexe = document.getElementById('modifierSexeEmployeur').value;
+                employeur.age = document.getElementById('modifierAgeEmployeur').value;
+                employeur.poste = document.getElementById('modifierPosteEmployeur').value;
+                employeur.telephone = document.getElementById('modifierTelephoneEmployeur').value;
+                employeur.email = document.getElementById('modifierEmailEmployeur').value;
+                employeur.salaire = document.getElementById('modifierSalaireEmployeur').value;
+
+                const newPhoto = document.getElementById('modifierPhotoEmployeur').files[0];
+                if (newPhoto) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        employeur.photo = e.target.result;
+                        saveEmployeursToStorage();
+                        renderTable(employeurs);
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('modifierEmployeurModal'));
+                        modal.hide();
+                    };
+                    reader.readAsDataURL(newPhoto);
+                } else {
+                    saveEmployeursToStorage();
+                    renderTable(employeurs);
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('modifierEmployeurModal'));
+                    modal.hide();
+                }
+            };
+        }
+
+        function confirmDeleteEmployeur(index) {
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                employeurs.splice(index, 1);
+                saveEmployeursToStorage();
+                renderTable(employeurs);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('supprimerEmployeurModal'));
+                modal.hide();
+            };
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredEmployeurs = employeurs.filter(employeur => {
+                return employeur.nom.toLowerCase().includes(searchTerm) ||
+                       employeur.prenom.toLowerCase().includes(searchTerm) ||
+                       employeur.sexe.toLowerCase().includes(searchTerm) ||
+                       employeur.age.toString().toLowerCase().includes(searchTerm) ||
+                       employeur.poste.toLowerCase().includes(searchTerm) ||
+                       employeur.telephone.toLowerCase().includes(searchTerm) ||
+                       employeur.email.toLowerCase().includes(searchTerm) ||
+                       employeur.salaire.toString().toLowerCase().includes(searchTerm);
+            });
+            renderTable(filteredEmployeurs);
+        });
+
+        // Load employeurs from local storage when the page loads
+        loadEmployeursFromStorage();
+    </script>
+</body>
+
+</html>
