@@ -1,4 +1,4 @@
-var buttons = document.querySelectorAll('.indexe');
+var buttons = document.getElementsByClassName('.indexe');
 
 // Fonction pour enregistrer l'index du bouton actif dans le stockage local
 function setActiveButton(index) {
