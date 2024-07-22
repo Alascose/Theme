@@ -17,14 +17,15 @@ a
   text-decoration: none;
 }
 
-.d1:hover
-{
-background-color: rgb(14, 72, 208);
-color: white;
-}
-
 h1
 {
   font-style: italic;
 }
 
+.indexli
+{
+    width: 180px;
+    cursor: pointer;
+    height: 35px;
+  border: none;
+}
